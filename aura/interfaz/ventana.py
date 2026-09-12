@@ -3,6 +3,12 @@
 Corre en el hilo principal porque `cv2.imshow` no es seguro fuera de él. Todo
 lo demás (cámara, bot, RPA) vive en otros hilos justamente para que este quede
 libre de dibujar.
+
+**Los tres métodos se llaman solo desde el hilo principal.** Llamar a `cerrar()`
+desde otro hilo revienta con «QObject::startTimer: Timers cannot be started from
+another thread». Esto importa en la Fase 3: `/apagar` llega por el hilo del bot,
+así que ese comando tiene que levantar una bandera que el bucle principal lea,
+no cerrar la ventana él mismo.
 """
 
 from __future__ import annotations

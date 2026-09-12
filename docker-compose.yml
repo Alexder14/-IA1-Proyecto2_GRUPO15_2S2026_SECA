@@ -10,8 +10,8 @@ x-comun: &comun
   build:
     context: .
     args:
-      UID: ${UID:-1000}
-      GID: ${GID:-1000}
+      UID: ${HOST_UID:-1000}
+      GID: ${HOST_GID:-1000}
   image: aura-dev
   working_dir: /app
   environment:
@@ -36,6 +36,11 @@ services:
       DISPLAY: ${DISPLAY:-:0}
     devices:
       - /dev/video0:/dev/video0
+    # /dev/video0 es root:video con permisos 660. En el host podés leerlo por
+    # una ACL, pero las ACL no cruzan al contenedor: adentro hay que estar en
+    # el grupo. El GID lo calcula dev.sh porque no es 44 en todas las distros.
+    group_add:
+      - "${VIDEO_GID:-44}"
     # host para que la ventana y el bot de Telegram salgan sin enredos de red.
     network_mode: host
     command: bash

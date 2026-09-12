@@ -9,7 +9,12 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-export UID GID="$(id -g)"
+# HOST_UID y no UID: en bash UID es de solo lectura y exportarla revienta el
+# script en algunas shells.
+export HOST_UID="$(id -u)"
+export HOST_GID="$(id -g)"
+export VIDEO_GID="$(getent group video | cut -d: -f3)"
+: "${VIDEO_GID:=44}"
 
 if [[ "${1:-}" == "cam" ]]; then
     if [[ ! -e /dev/video0 ]]; then

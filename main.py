@@ -113,6 +113,8 @@ def bucle(app: Aplicacion) -> None:
         app.fps.marcar()
         _dibujar_fps(imagen, app.fps.fps)
 
+        # Fase 3 — P1 y P4: `/apagar` llega por el hilo del bot y no puede
+        # tocar la ventana. Va a levantar una bandera que se revisa acá.
         if not app.ventana.mostrar(imagen):
             log.info("Salida pedida por el usuario")
             break
