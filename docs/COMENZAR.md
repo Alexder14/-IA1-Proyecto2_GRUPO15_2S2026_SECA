@@ -13,15 +13,38 @@ detrás del reparto y los riesgos, está en [PLANIFICACION.md](PLANIFICACION.md)
 ```bash
 git clone git@github.com:Alexder14/-IA1-Proyecto2_GRUPO15_2S2026_SECA.git aura
 cd aura
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements-dev.txt
 cp config/config.example.json config/config.json
 cp .env.example .env
-pytest                                  # tienen que pasar 7
 ```
 
-Si `pip install` truena con MediaPipe en tu laptop, avisá en el grupo. Es el
-mismo problema que hay que resolver en la Pi y mejor saberlo desde ya.
+Y de ahí, con Docker (recomendado) o nativo.
+
+**Con Docker.** Nos da a los cinco las mismas versiones, sin pelear con la
+instalación de MediaPipe en cada laptop:
+
+```bash
+./scripts/dev.sh                        # shell sin cámara: para el bot y el RPA
+./scripts/dev.sh cam                    # con cámara y ventana: para visión
+pytest                                  # adentro del contenedor: pasan 13
+```
+
+`dev.sh cam` necesita `/dev/video0` y una sesión gráfica, así que funciona en
+Linux. En Windows con WSL2 la cámara requiere `usbipd` y es frágil; en macOS
+Docker no tiene passthrough de cámara y no hay forma de hacerlo funcionar. Si
+estás en alguno de esos dos, trabajá la parte de visión de forma nativa.
+
+**Nativo**, si preferís o si Docker no te sirve:
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements-dev.txt
+pytest                                  # tienen que pasar 13
+```
+
+**Ojo con una confusión:** que MediaPipe instale en el contenedor NO significa
+que instale en la Pi. En tu laptop se baja el wheel de x86 y en la Pi el de ARM:
+son archivos distintos con el mismo número de versión. El riesgo sigue vivo
+hasta que P5 lo pruebe en la Pi.
 
 ### Git
 

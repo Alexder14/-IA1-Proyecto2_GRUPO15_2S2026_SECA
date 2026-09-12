@@ -78,6 +78,8 @@ aura-G15-IA/
 ├── docs/                       # Manuales y diagramas — entregable calificado
 ├── scripts/                    # Instalación, arranque y despliegue en la Pi
 ├── deploy/                     # Servicio de systemd
+├── Dockerfile                  # Entorno de desarrollo (NO es el despliegue)
+└── docker-compose.yml
 ├── tests/                      # Pruebas de la lógica de gestos y del agente
 ├── main.py                     # Punto de entrada del agente
 ├── requirements.txt
@@ -158,23 +160,39 @@ y JavierB20). **Cada integrante entrega el proyecto de forma individual en UEDI*
 Habilidades 80 / Conocimientos 20. El punteo más grande, con diferencia, está en
 que la AR se vea fluida y muestre el razonamiento del agente.
 
-## Puesta en marcha
+## Desarrollo
+
+Dos caminos. El contenedor es el recomendado: nos da a los cinco las mismas
+versiones y evita el "a mí no me instala MediaPipe".
+
+```bash
+cp .env.example .env                    # y llenar el token del bot
+cp config/config.example.json config/config.json
+
+./scripts/dev.sh                        # shell sin cámara: bot y RPA
+./scripts/dev.sh cam                    # con cámara y ventana: visión
+```
+
+O nativo, si preferís:
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env          # y llenar el token del bot
-cp config/config.example.json config/config.json
+pip install -r requirements-dev.txt
 python main.py
 ```
 
+**Docker es solo para desarrollar.** En la Raspberry Pi el agente corre nativo;
+una imagen construida en una laptop x86 no arranca en ARM, y el passthrough de
+cámara y de ventana es fricción justo en el módulo que vale 50 puntos.
+
 ## Despliegue en la Raspberry Pi
 
-Se corre nativo, sin contenedores. Docker se evaluó y se descartó: las laptops
-del equipo son x86 y la Pi es ARM, así que una imagen construida en la laptop no
-arranca en la Pi — habría que construirla en la Pi de todos modos. A eso se suma
-el passthrough de cámara y de la ventana de X11, que son justo el módulo que
-vale 50 puntos.
+Nativo, sin contenedores. El contenedor se queda en las laptops: una imagen
+construida en x86 no arranca en la Pi, y habría que reconstruirla allá de todos
+modos. Lo que viaja a la Pi es el código, no la imagen.
+
+Las versiones son las mismas en los dos lados porque ambos instalan desde
+`requirements.txt`.
 
 Una sola vez, en la Pi:
 
