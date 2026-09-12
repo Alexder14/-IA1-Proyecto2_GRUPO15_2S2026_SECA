@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Pruebas / herramientas
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Entorno
+.env
+*.log
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Sistema
+.DS_Store
+
+# Estado en tiempo de ejecución del agente (historial de gestos, bitácora,
+# gestos y acciones registrados desde el bot). Se regenera solo.
+datos/*
+
+# Capturas y descargas que produce el RPA
+descargas/
+
+!datos/.gitkeep
+
+# La configuración local no se versiona; config.example.json es la plantilla
+config/config.json
