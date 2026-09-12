@@ -1,0 +1,26 @@
+# Servicio de arranque automático de AURA en la Raspberry Pi.
+#
+#   sudo cp deploy/aura.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now aura
+#
+# Necesita sesión gráfica porque el agente abre una ventana de OpenCV: por eso
+# depende de graphical.target y no de multi-user.target.
+
+[Unit]
+Description=AURA — Augmented User Responsive Agent
+After=graphical.target
+Wants=graphical.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/aura-G15-IA
+Environment=DISPLAY=:0
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/home/pi/aura-G15-IA/.venv/bin/python main.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical.target
