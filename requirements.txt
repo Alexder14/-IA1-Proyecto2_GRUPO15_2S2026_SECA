@@ -1,5 +1,11 @@
 # Visión (únicas librerías de IA permitidas por el enunciado)
-opencv-python==4.10.0.84
+#
+# Va opencv-contrib-python y NO opencv-python: MediaPipe depende de la versión
+# contrib, y si se instalan las dos quedan dos paquetes distintos aportando el
+# mismo módulo cv2. Gana el que se instale de último, así que la versión que
+# termina corriendo deja de ser la que dice este archivo. contrib es un
+# superconjunto, así que no perdemos nada.
+opencv-contrib-python==4.11.0.86
 mediapipe==0.10.14
 numpy==1.26.4
 

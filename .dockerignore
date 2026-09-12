@@ -1,0 +1,16 @@
+.git
+.venv
+venv
+__pycache__
+*.py[cod]
+.pytest_cache
+.ruff_cache
+datos/*
+!datos/.gitkeep
+descargas
+*.log
+*.docx
+*.odt
+docs/*.pdf
+.env
+config/config.json

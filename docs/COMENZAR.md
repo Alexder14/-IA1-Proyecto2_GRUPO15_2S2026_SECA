@@ -13,15 +13,38 @@ detrás del reparto y los riesgos, está en [PLANIFICACION.md](PLANIFICACION.md)
 ```bash
 git clone git@github.com:Alexder14/-IA1-Proyecto2_GRUPO15_2S2026_SECA.git aura
 cd aura
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements-dev.txt
 cp config/config.example.json config/config.json
 cp .env.example .env
-pytest                                  # tienen que pasar 7
 ```
 
-Si `pip install` truena con MediaPipe en tu laptop, avisá en el grupo. Es el
-mismo problema que hay que resolver en la Pi y mejor saberlo desde ya.
+Y de ahí, con Docker (recomendado) o nativo.
+
+**Con Docker.** Nos da a los cinco las mismas versiones, sin pelear con la
+instalación de MediaPipe en cada laptop:
+
+```bash
+./scripts/dev.sh                        # shell sin cámara: para el bot y el RPA
+./scripts/dev.sh cam                    # con cámara y ventana: para visión
+pytest                                  # adentro del contenedor: pasan 13
+```
+
+`dev.sh cam` necesita `/dev/video0` y una sesión gráfica, así que funciona en
+Linux. En Windows con WSL2 la cámara requiere `usbipd` y es frágil; en macOS
+Docker no tiene passthrough de cámara y no hay forma de hacerlo funcionar. Si
+estás en alguno de esos dos, trabajá la parte de visión de forma nativa.
+
+**Nativo**, si preferís o si Docker no te sirve:
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements-dev.txt
+pytest                                  # tienen que pasar 13
+```
+
+**Ojo con una confusión:** que MediaPipe instale en el contenedor NO significa
+que instale en la Pi. En tu laptop se baja el wheel de x86 y en la Pi el de ARM:
+son archivos distintos con el mismo número de versión. El riesgo sigue vivo
+hasta que P5 lo pruebe en la Pi.
 
 ### Git
 
@@ -84,8 +107,8 @@ hay librería de reemplazo permitida.
 
 # P1 — Percepción e integración
 
-Tus carpetas: `aura/percepcion/` y `main.py`. Sos además el que arma las piezas
-de los demás, así que el bucle principal es tuyo.
+Tus carpetas: `aura/percepcion/`, `aura/interfaz/ventana.py` y `main.py`. Sos
+además el que arma las piezas de los demás, así que el bucle principal es tuyo.
 
 ### Fase 1 · 11–18/09
 
@@ -230,11 +253,9 @@ pensando AURA.
 
 1. `Overlay` completo: landmarks, bounding box de la persona, gesto detectado,
    nivel de confianza, interpretación y acción a ejecutar.
-2. `Ventana`, que va en el hilo principal porque `cv2.imshow` no es seguro fuera
-   de él.
-3. Legibilidad. El panel se va a ver en un video grabado con celular, así que
+2. Legibilidad. El panel se va a ver en un video grabado con celular, así que
    contraste fuerte, texto grande, y que no tape la cara de la persona.
-4. Las transiciones del robot conectadas a los estados reales del agente.
+3. Las transiciones del robot conectadas a los estados reales del agente.
 
 ### Fase 3 · 03/10–09/10
 

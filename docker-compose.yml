@@ -1,0 +1,41 @@
+# Dos servicios sobre la misma imagen.
+#
+#   aura       — sin cámara ni ventana. Para P4 (bot) y P5 (RPA).
+#   aura-cam   — con cámara y ventana. Para P1, P2 y P3.
+#
+# Se separan porque Compose falla al arrancar si /dev/video0 no existe, y no
+# todos van a tener cámara conectada todo el tiempo.
+
+x-comun: &comun
+  build:
+    context: .
+    args:
+      UID: ${UID:-1000}
+      GID: ${GID:-1000}
+  image: aura-dev
+  working_dir: /app
+  environment:
+    PYTHONUNBUFFERED: "1"
+  stdin_open: true
+  tty: true
+
+services:
+  aura:
+    <<: *comun
+    volumes:
+      - .:/app
+    command: bash
+
+  aura-cam:
+    <<: *comun
+    volumes:
+      - .:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+    environment:
+      PYTHONUNBUFFERED: "1"
+      DISPLAY: ${DISPLAY:-:0}
+    devices:
+      - /dev/video0:/dev/video0
+    # host para que la ventana y el bot de Telegram salgan sin enredos de red.
+    network_mode: host
+    command: bash
