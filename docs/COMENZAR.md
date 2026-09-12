@@ -139,7 +139,9 @@ Cierra cuando la Pi corre el pipeline completo sin que se note lag.
 ### Fase 3 · 03/10–09/10
 
 1. `/iniciar` y `/apagar` tienen que controlar el bucle de verdad, no una
-   variable suelta. Coordinalo con P4.
+   variable suelta. Coordinalo con P4. Ojo: esos comandos llegan por el hilo
+   del bot y **no pueden tocar la ventana** — Qt truena si la cerrás desde otro
+   hilo. Tienen que levantar una bandera que el bucle principal lea.
 2. Revisar los PR de los demás. Esta fase todos están tocando cosas que se
    cruzan y alguien tiene que ver el conjunto.
 
