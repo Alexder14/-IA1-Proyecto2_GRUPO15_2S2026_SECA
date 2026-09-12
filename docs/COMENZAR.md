@@ -84,8 +84,8 @@ hay librería de reemplazo permitida.
 
 # P1 — Percepción e integración
 
-Tus carpetas: `aura/percepcion/` y `main.py`. Sos además el que arma las piezas
-de los demás, así que el bucle principal es tuyo.
+Tus carpetas: `aura/percepcion/`, `aura/interfaz/ventana.py` y `main.py`. Sos
+además el que arma las piezas de los demás, así que el bucle principal es tuyo.
 
 ### Fase 1 · 11–18/09
 
@@ -230,11 +230,9 @@ pensando AURA.
 
 1. `Overlay` completo: landmarks, bounding box de la persona, gesto detectado,
    nivel de confianza, interpretación y acción a ejecutar.
-2. `Ventana`, que va en el hilo principal porque `cv2.imshow` no es seguro fuera
-   de él.
-3. Legibilidad. El panel se va a ver en un video grabado con celular, así que
+2. Legibilidad. El panel se va a ver en un video grabado con celular, así que
    contraste fuerte, texto grande, y que no tape la cara de la persona.
-4. Las transiciones del robot conectadas a los estados reales del agente.
+3. Las transiciones del robot conectadas a los estados reales del agente.
 
 ### Fase 3 · 03/10–09/10
 

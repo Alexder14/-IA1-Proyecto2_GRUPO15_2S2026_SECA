@@ -35,3 +35,9 @@ descargas/
 
 # La configuración local no se versiona; config.example.json es la plantilla
 config/config.json
+
+# Documentos de ofimática generados para compartir. La fuente es docs/COMENZAR.md;
+# el Word se regenera desde ahí y no se versiona para que no quede desfasado.
+*.docx
+*.odt
+.~lock.*#

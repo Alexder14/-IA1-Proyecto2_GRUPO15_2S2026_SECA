@@ -5,7 +5,7 @@ Detalle de fases, contratos y riesgos en [PLANIFICACION.md](PLANIFICACION.md).
 
 | Rol | Integrante | Carné | Módulos a cargo | Paquetes |
 |-----|------------|-------|-----------------|----------|
-| P1 | | | Percepción e integración | `aura/percepcion/`, `main.py` |
+| P1 | Alexander Salazar | 201020600 | Percepción e integración | `aura/percepcion/`, `aura/interfaz/ventana.py`, `main.py` |
 | P2 | | | Clasificación de gestos | `aura/gestos/` |
 | P3 | | | Interfaz AR y robot 2D | `aura/interfaz/`, `assets/robot/` |
 | P4 | | | Núcleo del agente y Telegram | `aura/agente/`, `aura/bot/` |
