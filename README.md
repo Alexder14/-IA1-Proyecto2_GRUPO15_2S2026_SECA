@@ -11,6 +11,25 @@ segundo semestre 2026. Enunciado en `docs/Proyecto 2 - 2S2026.pdf`.
 **Equipo: lo que le toca a cada quien, fase por fase, está en
 [docs/COMENZAR.md](docs/COMENZAR.md).**
 
+## Levantar el entorno
+
+```bash
+git clone git@github.com:Alexder14/-IA1-Proyecto2_GRUPO15_2S2026_SECA.git aura
+cd aura
+cp config/config.example.json config/config.json
+cp .env.example .env
+
+./scripts/dev.sh          # shell de desarrollo, sin cámara (bot y RPA)
+./scripts/dev.sh cam      # con cámara y ventana (visión)
+```
+
+Adentro del contenedor, `pytest` tiene que pasar 13 pruebas y `python main.py`
+abre la ventana con el video.
+
+Si Docker no te sirve —en macOS no hay passthrough de cámara— andá por el
+camino nativo, que está en [docs/COMENZAR.md](docs/COMENZAR.md#paso-0--esto-lo-hacemos-todos)
+junto con las convenciones de Git y lo que le toca a cada quien.
+
 **Entrega: 16 de octubre de 2026. Calificación: 17 de octubre de 2026.**
 
 ## Restricciones que anulan el proyecto
