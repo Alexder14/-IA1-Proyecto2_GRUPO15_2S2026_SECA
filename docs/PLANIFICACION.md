@@ -133,7 +133,11 @@ requiere avisar al grupo.
 OpenCV y MediaPipe. Si el 15/09 no corre en la Pi, eso pasa a ser el único tema
 del grupo hasta que corra. No dejarlo para la Fase 2.
 
-**Cierre de fase:** la Pi enciende la cámara y dibuja landmarks en pantalla.
+**Cierre de fase:** la Pi muestra el video en pantalla, en vivo y sin lag.
+
+Los landmarks no entran acá: dibujarlos necesita el extractor de MediaPipe, que
+es Fase 2. Adelantarlo antes de que P5 confirme que MediaPipe instala en ARM
+sería construir sobre algo que quizás haya que rehacer.
 
 ### Fase 2 — 19/09 a 02/10 · Visión, MediaPipe y detección de gestos (2 semanas)
 

@@ -83,7 +83,7 @@ Cada función pendiente dice `NotImplementedError("Fase N — PX")`.
 
 | Fase | Cierra | Día | Qué se cierra |
 |------|--------|-----|---------------|
-| 1 | 18/09 | viernes | La Pi enciende la cámara y dibuja landmarks |
+| 1 | 18/09 | viernes | La Pi muestra el video en pantalla, sin lag |
 | 2 | 02/10 | viernes | Gesto → el robot cambia de estado → el panel muestra el razonamiento |
 | 3 | 09/10 | viernes | Los 13 comandos de Telegram responden |
 | 4 | 14/10 | miércoles | Gesto → RPA → resultado mostrado al usuario |
