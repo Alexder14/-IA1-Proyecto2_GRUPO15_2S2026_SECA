@@ -1,0 +1,32 @@
+{
+  "camara": {
+    "indice": 0,
+    "ancho": 640,
+    "alto": 480,
+    "fps_objetivo": 15
+  },
+  "percepcion": {
+    "confianza_deteccion": 0.6,
+    "confianza_seguimiento": 0.5,
+    "max_manos": 2
+  },
+  "gestos": {
+    "umbral_confianza": 0.75,
+    "frames_para_confirmar": 5,
+    "enfriamiento_segundos": 3.0
+  },
+  "interfaz": {
+    "mostrar_landmarks": true,
+    "mostrar_bounding_box": true,
+    "mostrar_panel_razonamiento": true,
+    "pantalla_completa": false
+  },
+  "robot": {
+    "ruta_assets": "assets/robot",
+    "escala": 0.25,
+    "posicion": "inferior_derecha"
+  },
+  "telegram": {
+    "intervalo_notificaciones_seg": 1.0
+  }
+}

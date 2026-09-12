@@ -1,0 +1,14 @@
+# Visión (únicas librerías de IA permitidas por el enunciado)
+opencv-python==4.10.0.84
+mediapipe==0.10.14
+numpy==1.26.4
+
+# Bot de Telegram
+python-telegram-bot==21.6
+
+# Monitoreo de la Raspberry Pi (/status)
+psutil==6.1.0
+
+# RPA web
+selenium==4.25.0
+requests==2.32.3
